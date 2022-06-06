@@ -1,0 +1,20 @@
+<div id="app-container">
+<h1>{{title}}</h1>
+<ul>
+    <li *ngFor="let item of students2">
+      <span class="student_name-span">{{item.name}}</span>
+      <span *ngIf="item.grade >= 6">{{item.grade}}</span>
+
+    </li>
+</ul>
+<!--item.name,mostrami il nomi, item.grade mostrami solo il voto maggiore o uguale al 6. array di nomi e voti messi sul componet ts -->
+</div>
+
+
+
+
+
+
+
+
+<router-outlet></router-outlet>
