@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Hero } from 'src/app/model/hero';
-import { HEROES } from 'src/app/model/moch-heros';
+// import { HEROES } from 'src/app/model/moch-heros';
 import { HeroService } from 'src/app/services/hero/hero.service';
 import { MessageService } from 'src/app/services/message/massage.service';
 
@@ -35,12 +35,33 @@ export class HeroesComponent implements OnInit {
 
   // }
 
-  getHeroes(){
+  getHeroes() {
     this.heroServ.getHeroes().subscribe({
       next: newHeroes => this.heroes = newHeroes,
       error: err => console.log(err)
 
     })
-}
+  }
+
+
+  add(name: string): void {
+    name = name.trim();
+    if (!name) { return; }
+    this.heroServ.addHero({ name } as Hero)
+      .subscribe(hero => {
+        this.heroes.push(hero);
+      });
+  }
+
+  delete(hero: Hero): void {
+
+    this.heroServ.deleteHero(hero.id).subscribe({
+      next: (hero) => this.heroes = this.heroes.filter(h => h.id !== hero.id),
+      error: (err) => console.log(err)
+
+    });
+
+  }
+
 
 }
